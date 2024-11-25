@@ -80,13 +80,12 @@ class SinglePlayerGameTest {
 		assertEquals(84, partie.score());
 	}
 
+
 	// Quelques methodes utilitaires pour faciliter l'écriture des tests
-	private boolean lancerPlusieurs(int n, int quilles) {
-		boolean leTourcontinue = false;
+	private void lancerPlusieurs(int n, int quilles) {
 		for (int i = 0; i < n; i++) {
-			leTourcontinue = partie.enregistreLancer(quilles);
+			partie.enregistreLancer(quilles);
 		}
-		return leTourcontinue;
 	}
 
 	private void faireUnSpare() {

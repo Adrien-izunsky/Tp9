@@ -26,11 +26,14 @@ class GameRunTest {
 
 	@Test
 	void passeAuTourSuivant() {
-		assertTrue(partie.enregistreLancer(1), "Premier lancer, le tour continue");
-		assertFalse(partie.enregistreLancer(1), "Deuxième lancer, le tour est fini");
+		partie.enregistreLancer(1);  // Premier lancer, le tour continue (pas besoin d'assigner à une variable)
 		assertEquals(2, partie.numeroTourCourant(), "On doit être au tour n°2");
 		assertEquals(1, partie.numeroProchainLancer(), "On doit être à la boule n°1");
+
+		partie.enregistreLancer(1);  // Deuxième lancer, le tour est fini
+		assertEquals(2, partie.numeroTourCourant(), "Le tour doit être terminé après deux lancers");
 	}
+
 
 	@Test
 	void testAllOnes() {
@@ -67,6 +70,7 @@ class GameRunTest {
 	void unLancerDeTrop() {
 		lancerPlusieurs(20, 0); // Le jeu est fini
 
+		// Test de l'exception lancée lorsqu'on essaie d'enregistrer un lancer supplémentaire
 		assertThrows(IllegalStateException.class, () -> {
 			// On doit avoir une exception
 			partie.enregistreLancer(0);
@@ -74,13 +78,12 @@ class GameRunTest {
 	}
 
 	// Quelques methodes utilitaires pour faciliter l'écriture des tests
-	private boolean lancerPlusieurs(int n, int quilles) {
-		boolean leTourcontinue = false;
+	private void lancerPlusieurs(int n, int quilles) {
 		for (int i = 0; i < n; i++) {
-			leTourcontinue = partie.enregistreLancer(quilles);
+			partie.enregistreLancer(quilles);
 		}
-		return leTourcontinue;
 	}
+
 
 	private void faireUnSpare() {
 		partie.enregistreLancer(7);
